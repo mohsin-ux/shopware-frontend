@@ -1,0 +1,5 @@
+version: '3.6'
+services:
+  web:
+    ports:
+      - '13229:9229'

@@ -1,0 +1,4 @@
+  services:
+    web:
+        external_links:
+          - "ddev-router:kitchenz-shopware6.ddev.site"
