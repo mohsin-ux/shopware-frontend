@@ -6,7 +6,7 @@ export default defineNuxtConfig({
       shopware: {
         shopwareEndpoint: "https://kitchenz-shopware6.ddev.site",
         shopwareAccessToken: "SWSCADD3ZW5YA01PDXY3WU44BA",
-        devStorefrontUrl: "",
+        devStorefrontUrl: "/",
       },
     },
   },
@@ -57,4 +57,13 @@ export default defineNuxtConfig({
     langDir: "i18n/src/",
     locales: i18nConfig.locales,
   },
+  vite: {
+    server: {
+      hmr: {
+        protocol: "wss",
+        clientPort: 443,
+        path: "hmr/",
+      },
+    },
+  }
 });
