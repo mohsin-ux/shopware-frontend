@@ -50,7 +50,7 @@ export default defineNuxtConfig({
   },
   i18n: {
     vueI18n: {
-      fallbackLocale: "en-GB",
+      fallbackLocale: "de-DE",
     },
     strategy: "prefix_except_default",
     defaultLocale: i18nConfig.defaultLocale,
