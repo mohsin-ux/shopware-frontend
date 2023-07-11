@@ -19,11 +19,14 @@ Go to [Documentation > Requirements](https://frontends.shopware.com/framework/re
 In order to have a different API connect to the app, adjust the API credentials in the `nuxt.config.ts` file:
 `shopwareEndpoint` and `shopwareAccessToken`.
 
-## Customize
+## DDEV Setup
 
-Now, you can have a look on the pages and components and add your stuff there.
-
-[TODO: explain cms overriding or link to the docs].
+- Install ddev https://ddev.readthedocs.io/en/stable/#installation
+- Run:
+```
+ddev start
+```
+- Run `ddev launch` to launch the frontend `https://kitchenz-frontendz.ddev.site/` 
 
 ## Install & Run
 
