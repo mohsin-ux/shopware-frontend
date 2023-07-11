@@ -5,6 +5,7 @@ const {
   setDefaultCustomerShippingAddress,
   setDefaultCustomerBillingAddress,
   deleteCustomerAddress,
+  loadCustomerAddresses,
 } = useAddress();
 const { defaultBillingAddressId, defaultShippingAddressId } = useUser();
 const { refreshSessionContext } = useSessionContext();
@@ -23,13 +24,13 @@ const props = withDefaults(
     canSetDefault: true,
     canEdit: true,
     canDelete: false,
-  }
+  },
 );
 const canBeDeleted = computed(
   () =>
     props.canDelete &&
     defaultShippingAddressId.value !== props.address.id &&
-    defaultBillingAddressId.value !== props.address.id
+    defaultBillingAddressId.value !== props.address.id,
 );
 
 const setDefaultShippingAddress = async () => {
@@ -58,6 +59,8 @@ const removeAddress = async (addressId: string) => {
     pushSuccess(t("account.messages.addressDeletedSuccess"));
   } catch (error) {
     pushError(t("account.messages.addressDeletedError"));
+  } finally {
+    loadCustomerAddresses();
   }
 };
 

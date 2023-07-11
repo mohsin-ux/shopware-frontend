@@ -28,6 +28,23 @@ ddev start
 ```
 - Run `ddev launch` to launch the frontend `https://kitchenz-frontendz.ddev.site/` 
 
+## Update from shopware/frontends demo
+
+### READ CAREFULLY
+
+1. Make sure the workspace has no pending changes
+2. Download latest vue-demo-store
+```
+mkdir .tmp && cd .tmp
+wget https://github.com/shopware/frontends/archive/refs/heads/main.zip
+unzip main.zip
+rsync -av ./frontends-main/templates/vue-demo-store ../
+cd ..
+rm -fr .tmp
+```
+3. Now carefully stage or discard the changes (this can take some time....)
+
+
 ## Install & Run
 
 1. `pnpm i` to install deps

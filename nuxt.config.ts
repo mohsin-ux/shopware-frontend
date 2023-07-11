@@ -1,4 +1,5 @@
 import i18nConfig from "./i18n/src/config";
+import { VueDisableInputsBeforeMount } from "vite-vue-plugin-disable-inputs";
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   runtimeConfig: {
@@ -8,6 +9,41 @@ export default defineNuxtConfig({
         shopwareAccessToken: "SWSCADD3ZW5YA01PDXY3WU44BA",
         devStorefrontUrl: "/",
       },
+    },
+  },
+  routeRules: {
+    "/": {
+      isr: 60 * 60 * 24,
+    },
+    "/checkout": {
+      ssr: false,
+      headers: {
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+      },
+    },
+    "/checkout/**": {
+      ssr: false,
+    },
+    "/login": {
+      ssr: false,
+    },
+    "/register": {
+      ssr: false,
+    },
+    "/reset-password": {
+      ssr: false,
+    },
+    "/wishlist": {
+      ssr: false,
+    },
+    "/account": {
+      ssr: false,
+    },
+    "/account/**": {
+      ssr: false,
+    },
+    "/**": {
+      isr: 60 * 60 * 24,
     },
   },
   /**
@@ -65,5 +101,6 @@ export default defineNuxtConfig({
         path: "hmr/",
       },
     },
-  }
+    plugins: [VueDisableInputsBeforeMount()],
+  },
 });
