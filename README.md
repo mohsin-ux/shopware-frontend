@@ -38,7 +38,7 @@ ddev start
 mkdir .tmp && cd .tmp
 wget https://github.com/shopware/frontends/archive/refs/heads/main.zip
 unzip main.zip
-rsync -av ./frontends-main/templates/vue-demo-store/ ../
+rsync -av --ignore-times ./frontends-main/templates/vue-demo-store/ ../
 cd ..
 rm -fr .tmp
 ```
