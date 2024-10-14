@@ -18,20 +18,20 @@ onMounted(async () => {
   const reviewsResponse = await getProductReviews(
     props.product.id,
     undefined,
-    apiInstance,
+    apiInstance
   );
   reviews.value = reviewsResponse?.elements || [];
 });
 
 const productName = computed(() =>
-  getTranslatedProperty(props.product, "name"),
+  getTranslatedProperty(props.product, "name")
 );
 const manufacturerName = computed(() =>
-  getTranslatedProperty(props.product.manufacturer, "name"),
+  getTranslatedProperty(props.product.manufacturer, "name")
 );
 
 const description = computed(() =>
-  getTranslatedProperty(props.product, "description"),
+  getTranslatedProperty(props.product, "description")
 );
 const properties = computed(() => props.product?.properties || []);
 
@@ -43,6 +43,10 @@ const handleVariantChange = (val: Product) => {
 
 <template>
   <!-- eslint-disable vue/no-v-html -->
+  <div
+    class="hidden lg:block text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl"
+    v-html="productName"
+  />
   <div class="flex flex-row flex-wrap justify-start">
     <!-- Product name for mobile view -->
     <div class="basis-12/12 display lg:hidden">
@@ -52,18 +56,14 @@ const handleVariantChange = (val: Product) => {
       />
     </div>
     <div class="basis-12/12 lg:basis-7/12 product-gallery overflow-hidden">
-      <ProductGallery :product="product" />
+      <!-- <ProductGallery :product="product" /> -->
     </div>
-    <div class="basis-12/12 lg:basis-5/12 product-description">
+    <div class="basis-12/12 lg:basis-5/12 product-description bg">
       <!-- Product info -->
       <div
         class="max-w-2xl mx-auto pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pb-24 lg:pl-16 lg:pr-0"
       >
         <!-- Product name starting from lg breakpoint -->
-        <div
-          class="hidden lg:block text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl"
-          v-html="productName"
-        />
 
         <div
           v-show="manufacturerName !== ''"
@@ -77,13 +77,14 @@ const handleVariantChange = (val: Product) => {
         </div>
 
         <!-- Options -->
-        <div class="mt-4 lg:mt-0 lg:row-span-3">
+        <div class="mt-4 lg:mt-0 lg:row-span-3 flex flex-col items-start">
           <h2 class="sr-only">Product information</h2>
-          <div class="product-variants mt-10">
+          <div class="mt-10 flex flex-col items-start">
             <ProductPrice :product="product" />
             <ProductUnits :product="product" class="text-sm" />
-            <ProductVariantConfigurator @change="handleVariantChange" />
+            <!-- <ProductVariantConfigurator @change="handleVariantChange" /> -->
             <ProductAddToCart :product="product" />
+            <ProductReviews :product="product" :reviews="reviews" />
           </div>
         </div>
 

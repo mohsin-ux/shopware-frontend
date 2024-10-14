@@ -10,7 +10,7 @@ const getPrice = computed<string>(() => getFormattedPrice(props.value));
 <template>
   <p class="flex gap-1">
     <slot name="beforePrice" />
-    <span>{{ getPrice }}</span>
+    <span class="text-[#111222] font-extrabold">{{ getPrice }}*</span>
     <slot name="afterPrice" />
   </p>
 </template>

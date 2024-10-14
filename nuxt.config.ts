@@ -5,12 +5,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       shopware: {
-        shopwareEndpoint: "https://kitchenz-shopware6.ddev.site",
+        shopwareEndpoint: "https://shopware.grandmarkt.de",
         shopwareAccessToken: "SWSCADD3ZW5YA01PDXY3WU44BA",
         devStorefrontUrl: "/",
       },
     },
   },
+
   routeRules: {
     "/": {
       isr: 60 * 60 * 24,

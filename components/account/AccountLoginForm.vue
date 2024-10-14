@@ -140,9 +140,12 @@ useFocus(emailImputElement, { initialValue: true });
               </button>
             </div>
           </slot>
+
         </div>
       </form>
+
     </div>
+
     <div v-else>
       <h2>{{ $t("account.loggedInInfo") }}</h2>
       <button

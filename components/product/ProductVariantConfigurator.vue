@@ -66,7 +66,7 @@ const onHandleChange = async () => {
       </h3>
       <fieldset class="mt-4 flex-1">
         <legend class="sr-only">
-          {{ $t("product.choose") }} {{ optionGroup.name }}
+          {{ $t("product.choose") }} {{ optionGroup.name }}hello  
         </legend>
         <div class="flex gap3">
           <label
