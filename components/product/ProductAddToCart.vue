@@ -35,7 +35,9 @@ const kitchenzModalController = useModal()
       <div
         class="border py-2 px-4 mt-4 border-solid border-1 border-black flex justify-between"
       >
-        <button @click="decrement" class="px-2 bg-white">-</button>
+        <button @click="decrement" class="px-2 bg-white">
+          <IconsMinus/>
+        </button>
 
         <input
           id="qty"
@@ -47,7 +49,9 @@ const kitchenzModalController = useModal()
           data-testid="product-quantity"
           class="text-center outline-none"
         />
-        <button @click="increment" class="px-2 bg-white">+</button>
+        <button @click="increment" class="px-2 bg-white">
+          <IconsPlus/>
+        </button>
       </div>
     </div>
     <div class="basis-3/4 ml-4">
@@ -57,7 +61,7 @@ const kitchenzModalController = useModal()
         :disabled="loading"
         @click.prevent="kitchenzModalController.open"
       >
-        {{ $t("product.addToCart") }}
+        konfigurieren
       </button>
       <SharedModal :controller="kitchenzModalController">
         <ProductConfigurator @success="kitchenzModalController.close"/>

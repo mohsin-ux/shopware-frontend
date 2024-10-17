@@ -84,7 +84,7 @@ const handleVariantChange = (val: Product) => {
             <ProductUnits :product="product" class="text-sm" />
             <!-- <ProductVariantConfigurator @change="handleVariantChange" /> -->
             <ProductAddToCart :product="product" />
-            <ProductReviews :product="product" :reviews="reviews" />
+            <!-- <ProductReviews :product="product" :reviews="reviews" /> -->
           </div>
         </div>
 
