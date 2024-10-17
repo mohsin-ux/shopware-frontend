@@ -17,7 +17,7 @@ console.log(allProfilesLabel);
 const allProfilesImage = allProfilesMetaData.map(
   (profileData) => profileData.options[0].configMedia
 );
-console.log(allProfilesImage)
+console.log(allProfilesImage);
 
 // const allData = parsedData.map(data => data.groups).filter((subData, index) => index)
 // console.log(allData)
@@ -32,9 +32,7 @@ console.log(allProfilesImage)
         1 <span class="text-base font-normal">/12</span> Produktlinie wählen
       </h1>
       <ConfiguratorUserInput />
-      <ConfiguratorImageMenu
-        :allProfilesLabel="allProfilesLabel"
-      />
+      <ConfiguratorImageMenu :allProfilesLabel="allProfilesLabel" />
       <!-- <ConfiguratorPriceMenu /> -->
       <!-- <ConfiguratorReview/> -->
     </div>
@@ -42,4 +40,9 @@ console.log(allProfilesImage)
     <ConfiguratorSidebar />
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+</style>

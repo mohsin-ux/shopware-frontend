@@ -26,7 +26,7 @@ function setCurrentOption(index: number) {
 </script>
 
 <template>
-  <div class="bg-[#EEEDE8] w-[275px] sticky bottom-0">
+  <div class="bg-[#EEEDE8] sm:flex sm:flex-col sm:justify-between -mt-4 sm:w-[275px] sticky bottom-0 box-border">
     <SideBarMenu
       :products="products"
       :isShowMenu="isShowMenu"
@@ -34,7 +34,7 @@ function setCurrentOption(index: number) {
       @currentOption="setCurrentOption"
     />
 
-    <div class="sm:p-4 -m-2">
+    <div class="w-full sm:p-4">
       <div
         class="w-full py-3 sm:p-2 sm:bg-white flex flex-col gap-2 justify-center items-center max-sm:rounded-t-2xl"
         :class="{ 'bg-white': isShowMenu }"
@@ -44,7 +44,7 @@ function setCurrentOption(index: number) {
           @click="toggleShowMenu"
           :class="{ 'bg-green hidden': isShowMenu }"
         >
-          <span class="w-10 h-1 bg-black rounded block"></span>
+          <span class="w-10 h-1 bg-black rounded"></span>
         </div>
         <p class="text-sm font-medium">
           Aktuelle Konfiguration: <span class="font-bold">€</span>
