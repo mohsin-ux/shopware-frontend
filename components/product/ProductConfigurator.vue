@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import {useFetchData} from 'composables/configurator/fetchData'
+import { useConfigData } from "~/composables/configurator/configData";
 let indexOfCurrentProfile = ref<number>(0);
 let indexOfCurrentGroup = ref<number>(1);
-const { allProfilesLabels, groupLabels, optionLabels} = await useFetchData(indexOfCurrentProfile, indexOfCurrentGroup);
+const { allProfilesLabels, groupLabels, optionLabels } = await useConfigData(
+  indexOfCurrentProfile,
+  indexOfCurrentGroup
+);
 
 let selectedGroupLabel = ref<string>("Produktlinie");
-
-
 
 function setCurrentProfile(index: number, label: string) {
   indexOfCurrentProfile.value = index;
