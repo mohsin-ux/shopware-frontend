@@ -1,43 +1,46 @@
 <script setup lang="ts">
-// import { useConfigurator } from "composables/useConfigurator";
-const { parsedData } = await useConfigurator();
-// console.log(parsedData)
-// const profil = parsedData.map(single => single.profil)
-// const price = parsedData.map(single => single.price)
-// console.log(price)
-// console.log(profil)
-const allProfilesMetaData = parsedData.map(
-  (profileData) => profileData.groups[0]
-);
-console.log(` the groups of the data${allProfilesMetaData}`);
-const allProfilesLabel = allProfilesMetaData.map(
-  (profileData) => profileData.options[0].label
-);
-console.log(allProfilesLabel);
-const allProfilesImage = allProfilesMetaData.map(
-  (profileData) => profileData.options[0].configMedia
-);
-console.log(allProfilesImage);
+import {useFetchData} from 'composables/configurator/fetchData'
+let indexOfCurrentProfile = ref<number>(0);
+let indexOfCurrentGroup = ref<number>(1);
+const { allProfilesLabels, groupLabels, optionLabels} = await useFetchData(indexOfCurrentProfile, indexOfCurrentGroup);
 
-// const allData = parsedData.map(data => data.groups).filter((subData, index) => index)
-// console.log(allData)
+let selectedGroupLabel = ref<string>("Produktlinie");
+
+
+
+function setCurrentProfile(index: number, label: string) {
+  indexOfCurrentProfile.value = index;
+}
+function setCurrentGroup(index: number, currentGroupLabel: string) {
+  indexOfCurrentGroup.value = index;
+  selectedGroupLabel.value = currentGroupLabel;
+}
 </script>
 
 <template>
   <div
-    class="sm:flex sm:max-w-[970px] h-screen sm:max-h-[672px] relative overflow-y-auto overflow-x-hidden"
+    class="sm:flex h-screen sm:max-h-[672px] relative overflow-y-auto overflow-x-hidden"
   >
     <div class="p-6 pb-0 flex flex-col gap-3">
       <h1 class="text-2xl font-bold">
-        1 <span class="text-base font-normal">/12</span> Produktlinie wählen
+        1 <span class="text-base font-normal">/12</span>
+        {{ selectedGroupLabel }} wählen
       </h1>
       <ConfiguratorUserInput />
-      <ConfiguratorImageMenu :allProfilesLabel="allProfilesLabel" />
+      <ConfiguratorProfileMenu
+        :allProfilesLabels="allProfilesLabels"
+        @current-Profile="setCurrentProfile"
+      />
+      <!-- <ConfiguratorOptionsMenu :optionLabels="optionLabels" /> -->
       <!-- <ConfiguratorPriceMenu /> -->
-      <!-- <ConfiguratorReview/> -->
+      <!-- <ConfiguratorReview /> -->
     </div>
 
-    <ConfiguratorSidebar />
+    <ConfiguratorSidebar
+      :groupLabels="groupLabels"
+      :selectedGroupLabel="selectedGroupLabel"
+      @current-group-label="setCurrentGroup"
+    />
   </div>
 </template>
 <style scoped>
