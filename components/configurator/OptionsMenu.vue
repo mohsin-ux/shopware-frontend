@@ -6,7 +6,7 @@ defineProps<{
 
 <template>
   <div
-    class="flex flex-wrap justify-center gap-3 overflow-y-auto sm:max-w-[660px]"
+    class="flex flex-wrap justify-center gap-3 overflow-y-auto sm:w-[660px]"
   >
     <div
       v-for="label in optionLabels"

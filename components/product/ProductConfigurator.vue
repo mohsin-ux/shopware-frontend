@@ -1,21 +1,56 @@
 <script setup lang="ts">
 import { useConfigData } from "~/composables/configurator/configData";
-let indexOfCurrentProfile = ref<number>(0);
-let indexOfCurrentGroup = ref<number>(1);
+let currentProfileIndex = ref<number>(0);
+let currentGroupIndex = ref<number>(1);
 const { allProfilesLabels, groupLabels, optionLabels } = await useConfigData(
-  indexOfCurrentProfile,
-  indexOfCurrentGroup
+  currentProfileIndex,
+  currentGroupIndex
 );
 
-let selectedGroupLabel = ref<string>("Produktlinie");
+const selectedGroupLabel = ref<string>(groupLabels.value[0]);
+const isOptionsMenuVisible = ref<boolean>(false);
+let selectedGroupIndex = ref<number>(0);
+const nextGroupLabel = ref<string>(groupLabels.value[1]);
 
 function setCurrentProfile(index: number, label: string) {
-  indexOfCurrentProfile.value = index;
+  currentProfileIndex.value = index;
+  isOptionsMenuVisible.value = isOptionsMenuVisible.value ? false : true;
+  // const nextGroupIndex = selectedGroupIndex.value++;
+  setSelectedGroupLabel(selectedGroupIndex.value + 1);
+  setSelectedGroupIndex(selectedGroupIndex.value + 1);
+  // selectedGroupLabel.value = groupLabels.value[selectedGroupIndex.value];
+  setNextGroupLabel(selectedGroupIndex.value);
 }
+
 function setCurrentGroup(index: number, currentGroupLabel: string) {
-  indexOfCurrentGroup.value = index;
-  selectedGroupLabel.value = currentGroupLabel;
+  currentGroupIndex.value = index;
+  selectedGroupIndex.value = index;
+  setSelectedGroupLabel(index);
+  setNextGroupLabel(selectedGroupIndex.value);
+  setSelectedGroupIndex(index);
+  togglesOptionsMenuVisible(currentGroupLabel);
 }
+
+function setSelectedGroupLabel(selectedGroupIndex: number) {
+  selectedGroupLabel.value = groupLabels.value[selectedGroupIndex];
+}
+function setSelectedGroupIndex(groupIndex: number) {
+  selectedGroupIndex.value = groupIndex;
+}
+function setNextGroupLabel(selectedGroupIndex: number) {
+  nextGroupLabel.value = groupLabels.value[selectedGroupIndex + 1];
+}
+function togglesOptionsMenuVisible(currentGroupLabel: string) {
+  currentGroupLabel !== "Produktlinie"
+    ? (isOptionsMenuVisible.value = true)
+    : (isOptionsMenuVisible.value = false);
+}
+provide("sideBar", {
+  nextGroupLabel,
+  selectedGroupIndex,
+  groupLabels,
+  setCurrentGroup,
+});
 </script>
 
 <template>
@@ -27,21 +62,22 @@ function setCurrentGroup(index: number, currentGroupLabel: string) {
         1 <span class="text-base font-normal">/12</span>
         {{ selectedGroupLabel }} wählen
       </h1>
-      <ConfiguratorUserInput />
+      <ConfiguratorSearch />
       <ConfiguratorProfileMenu
+        v-if="isOptionsMenuVisible === false"
         :allProfilesLabels="allProfilesLabels"
         @current-Profile="setCurrentProfile"
       />
-      <!-- <ConfiguratorOptionsMenu :optionLabels="optionLabels" /> -->
+      <!-- :nextGroupLabel="nextGroupLabel" -->
+      <ConfiguratorOptionsMenu
+        v-if="isOptionsMenuVisible === true"
+        :optionLabels="optionLabels"
+      />
       <!-- <ConfiguratorPriceMenu /> -->
       <!-- <ConfiguratorReview /> -->
     </div>
 
-    <ConfiguratorSidebar
-      :groupLabels="groupLabels"
-      :selectedGroupLabel="selectedGroupLabel"
-      @current-group-label="setCurrentGroup"
-    />
+    <ConfiguratorSidebar />
   </div>
 </template>
 <style scoped>

@@ -1,21 +1,19 @@
 <script setup lang="ts">
 const props = defineProps<{
   isMenuVisible: boolean;
-  groupLabels: string[];
-  selectedGroupLabel: string;
 }>();
 const emit = defineEmits<{
   (e: "showMenu"): void;
-  (e: "currentOption", index: number, groupLabel: string): void;
+  // (e: "nextGroup"): void;
 }>();
-// const isShowMenu = toRef('isShowMenu')
 
-let selected = ref<number>(0);
+const { selectedGroupIndex, groupLabels, setCurrentGroup }: any =
+  inject("sideBar");
 
-function selectedOption(index: number, groupLabel: string) {
-  emit("currentOption", index, groupLabel);
+function selectedGroup(index: number, groupLabel: string) {
+  setCurrentGroup(index, groupLabel);
   emit("showMenu");
-  selected.value = index; 
+  // emit("nextGroup");
 }
 </script>
 
@@ -34,19 +32,21 @@ function selectedOption(index: number, groupLabel: string) {
     <div
       v-for="(groupLabel, index) in groupLabels"
       class="py-2 border-b border-[#DEDAD4] flex items-center cursor-pointer"
-      :class="{ 'font-bold': index === selected }"
     >
       <span
         class="w-3 h-3 rotate-45 absolute -left-1.5 bg-white"
-        :class="{ hidden: index !== selected }"
+        :class="{ hidden: index !== selectedGroupIndex }"
       ></span>
       <div
-        @click="selectedOption(index, groupLabel)"
+        @click="selectedGroup(index, groupLabel)"
         class="w-full bg-none text-start flex items-center"
+        :class="{ 'font-bold': index === selectedGroupIndex }"
       >
-        <p class="w-[28px]">{{ index + 1 }}.</p>
-        <p class="w-[100px]">{{ groupLabel }}</p>
-        <p>{{ selectedGroupLabel }}</p>
+        <p class="w-7">{{ index + 1 }}.</p>
+        <p class="w-24 hyphens-auto break-words" lang="de">{{ groupLabel }}</p>
+        <!-- <p class="text-red" v-if="index === selected">
+          {{ selectedGroupLabel }}
+        </p> -->
       </div>
     </div>
   </div>

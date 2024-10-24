@@ -1,25 +1,17 @@
 <script setup lang="ts">
 import SideBarMenu from "./SideBarMenu.vue";
-const props = defineProps<{
-  groupLabels: string[];
-  selectedGroupLabel: string;
-}>()
-const emits =defineEmits<{
-  (e: 'currentGroupLabel', index: number, currentGroupLabel: string ): void
-}>()
-
-
-
+const {nextGroupLabel, selectedGroupIndex, groupLabels }: any = inject("sideBar");
+// const props = defineProps<{ nextGroupLabel: string }>();
+// const emits = defineEmits<{}>();
+// const nextGroupLabel = ref<string>(groupLabels.value[1]);
 const isMenuVisible = ref<boolean>(false);
-let currentOption = ref<string>(props.groupLabels[1]);
 function toggleMenuVisible() {
   isMenuVisible.value = !isMenuVisible.value;
 }
-function setCurrentOption(index: number, currentGroupLabel: string) {
-  currentOption.value = props.groupLabels[index + 1];
-  emits('currentGroupLabel', index, currentGroupLabel)
-}
-
+// function setNextGroupLabel() {
+//   console.log(selectedGroupIndex.value)
+//   nextGroupLabel.value = groupLabels.value[selectedGroupIndex.value + 1];
+// }
 </script>
 
 <template>
@@ -27,12 +19,10 @@ function setCurrentOption(index: number, currentGroupLabel: string) {
     class="bg-[#EEEDE8] sm:flex sm:flex-col sm:justify-between -mt-4 sm:w-[340px] sticky bottom-0 box-border"
   >
     <SideBarMenu
-      :groupLabels="groupLabels"
       :isMenuVisible="isMenuVisible"
-      :selectedGroupLabel="selectedGroupLabel"
-      @showMenu="toggleMenuVisible"
-      @currentOption="setCurrentOption"
+      @show-menu="toggleMenuVisible"
     />
+    <!-- @nextGroup="setNextGroupLabel" -->
 
     <div class="w-full sm:p-4">
       <div
@@ -54,9 +44,8 @@ function setCurrentOption(index: number, currentGroupLabel: string) {
       <button
         class="bg-[#404853] w-full p-5 sm:p-2 text-white text-base font-medium"
       >
-        Weiter mit {{ currentOption }}
+        Weiter mit {{ nextGroupLabel }}
       </button>
-
     </div>
   </div>
 </template>

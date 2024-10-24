@@ -2,18 +2,16 @@
 defineProps<{
   allProfilesLabels: string[];
 }>();
-const emits = defineEmits<{
+const emit = defineEmits<{
   (e: "currentProfile", text: number, label: string): void;
 }>();
 function setCurrentProfile(index: number, label: string) {
-  emits("currentProfile", index, label);
+  emit("currentProfile", index, label);
 }
 </script>
 
 <template>
-  <div
-    class="flex flex-wrap justify-center gap-3 overflow-y-auto sm:max-w-[660px]"
-  >
+  <div class="flex flex-wrap justify-center gap-3 overflow-y-auto sm:w-[660px]">
     <div
       v-for="(label, index) in allProfilesLabels"
       class="w-[204px] h-[204px] border flex justify-center mt-2 relative hover:border-red hover:border-4 hover:p-1 transition-all"
